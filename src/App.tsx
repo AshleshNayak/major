@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Assessment from './pages/Assessment';
-import Profile from './pages/Profile';
+import ProfileCard from './components/ProfileCard'; // adjusted import path
 import Auth from './pages/Auth';
-import { AuthState } from './types';
+import { AuthState, UserProfile } from './types';
 import './index.css';
 
 function App() {
@@ -14,7 +14,26 @@ function App() {
     user: null
   });
 
-  React.useEffect(() => {
+  const [profile, setProfile] = useState<UserProfile>({
+  id: 'user-1',               
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 25,                    
+  gender: 'male',             
+  email: 'johndoe@example.com',
+  occupation: 'Engineer',
+  stressHistory: [],          
+  preferences: {
+    notifications: true,
+    darkMode: false,
+    emailUpdates: true,
+    privacyLevel: 'public'
+  }
+});
+
+  const [darkMode, setDarkMode] = useState<boolean>(profile.preferences.darkMode);
+
+  useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1);
       if (!authState.isAuthenticated && hash !== 'auth') {
@@ -39,6 +58,17 @@ function App() {
     
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [authState.isAuthenticated]);
+
+  // Sync profile darkMode preference with darkMode state
+  useEffect(() => {
+    setProfile(prev => ({
+      ...prev,
+      preferences: {
+        ...prev.preferences,
+        darkMode
+      }
+    }));
+  }, [darkMode]);
 
   const handleAuthSuccess = (user: any) => {
     setAuthState({
@@ -65,7 +95,14 @@ function App() {
       case 'assessment':
         return <Assessment />;
       case 'profile':
-        return <Profile />;
+        return (
+          <ProfileCard
+            profile={profile}
+            onUpdate={setProfile}
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+          />
+        );
       case 'auth':
         return <Auth onAuthSuccess={handleAuthSuccess} />;
       default:
@@ -74,9 +111,11 @@ function App() {
   };
 
   return (
-    <Layout isAuthenticated={authState.isAuthenticated} onLogout={handleLogout}>
-      {renderPage()}
-    </Layout>
+    <div className={darkMode ? 'dark' : ''}>
+      <Layout isAuthenticated={authState.isAuthenticated} onLogout={handleLogout}>
+        {renderPage()}
+      </Layout>
+    </div>
   );
 }
 

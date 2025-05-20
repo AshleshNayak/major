@@ -13,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <BrainCog className="h-8 w-8 text-blue-500" />
-            <span className="ml-2 text-xl font-semibold text-gray-800">H.S.D</span>
+            <span className="ml-2 text-xl font-semibold text-gray-800">Human Stress Detector</span>
           </div>
           
           <div className="flex items-center space-x-4">
