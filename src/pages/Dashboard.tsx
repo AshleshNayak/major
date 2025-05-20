@@ -81,7 +81,6 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Current stress level card */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">Current Stress Level</h2>
           <div className="flex flex-col items-center mb-4">
@@ -114,7 +113,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Latest Assessment */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">Latest Assessment</h2>
           <div className="text-center mb-4">
@@ -139,7 +137,6 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Quick Actions (Only Take New Assessment) */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">Quick Actions</h2>
           <div className="space-y-3">
@@ -158,7 +155,6 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Stress Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3">
           <StressChart data={stressHistory} />

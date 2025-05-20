@@ -59,7 +59,6 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [authState.isAuthenticated]);
 
-  // Sync profile darkMode preference with darkMode state
   useEffect(() => {
     setProfile(prev => ({
       ...prev,

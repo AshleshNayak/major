@@ -1,4 +1,4 @@
-/* -------------  Assessment.tsx ------------- */
+
 import React, { useState } from 'react';
 import Papa, { ParseResult } from 'papaparse';
 import { Line } from 'react-chartjs-2';
@@ -13,14 +13,12 @@ import {
   Legend,
 } from 'chart.js';
 
-// ─── Chart.js setup ──────────────────────────
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Assessment: React.FC = () => {
   const [originalData, setOriginalData] = useState<number[]>([]);
-  const samplingRate = 250; // ⚠️ Adjust if your device has a different fs
+  const samplingRate = 250; 
 
-  // ─── CSV Upload Handler ─────────────────────
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -59,7 +57,6 @@ const Assessment: React.FC = () => {
 
   return (
     <div className="space-y-10 p-4 md:p-8">
-      {/* ─── Header ─── */}
       <div>
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Stress Assessment</h1>
         <p className="text-gray-600">
@@ -67,7 +64,6 @@ const Assessment: React.FC = () => {
         </p>
       </div>
 
-      {/* ─── File uploader ─── */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Upload ECG Data</h2>
         <input
